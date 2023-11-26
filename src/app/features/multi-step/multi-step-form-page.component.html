@@ -1,1 +1,20 @@
-multi-step
+<div class="drf-container px-4 py-20 flex flex-col h-full pt-8">
+  <h1 class="font-bold text-3xl lg:text-6xl text-center mb-16">
+    Multi Step Form
+  </h1>
+
+  <drf-dynamic-form
+    [dynamicForm]="dynamicForm"
+    (formGroupCreated)="formGroupCreatedHandler($event)"
+  ></drf-dynamic-form>
+
+  @if (formGroup) {
+  <button
+    type="button"
+    class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 disabled:bg-gray-400 disabled:touch-none"
+    [disabled]="formGroup.invalid"
+  >
+    Submit
+  </button>
+  }
+</div>

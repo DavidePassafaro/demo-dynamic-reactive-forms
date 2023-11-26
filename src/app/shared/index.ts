@@ -1,2 +1,1 @@
-export { CheckboxListComponent } from './components/checkbox-list/checkbox-list.component';
-export { InputComponent } from './components/input/input.component';
+export { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';

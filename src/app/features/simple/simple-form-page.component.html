@@ -1,35 +1,19 @@
 <div class="drf-container px-4 py-20 flex flex-col h-full pt-8">
   <h1 class="font-bold text-3xl lg:text-6xl text-center mb-16">Simple Form</h1>
 
-  <drf-input
-    class="mb-6"
-    inputTitle="Your name"
-    inputId="name"
-    inputType="text"
-    [formControl]="name"
-  ></drf-input>
+  <drf-dynamic-form
+    [dynamicForm]="dynamicForm"
+    (formGroupCreated)="formGroupCreatedHandler($event)"
+  ></drf-dynamic-form>
 
-  <drf-checkbox-list
-    inputTitle="Your skills"
-    [options]="[
-      {
-        id: 'angular',
-        value: 'angular',
-        description: 'Angular'
-      },
-      {
-        id: 'react',
-        value: 'react',
-        description: 'React'
-      }
-    ]"
-    [formControl]="skills"
+  @if (formGroup) {
+  <button
+    type="button"
+    class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 disabled:bg-gray-400 disabled:touch-none"
+    [disabled]="formGroup.invalid"
+    (click)="submitClickHandler()"
   >
-  </drf-checkbox-list>
-
-  <br /><br />
-  Value: {{ formGroup.value | json }}
-  <br />
-  Status: {{ formGroup.status | titlecase }} and
-  {{ formGroup.pristine ? "Pristine" : "Dirty" }}
+    Submit
+  </button>
+  }
 </div>

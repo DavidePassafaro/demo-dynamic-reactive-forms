@@ -1,0 +1,22 @@
+<div>
+  <label [for]="inputId" class="block mb-2 text-sm font-medium text-gray-900">
+    {{ description }}
+  </label>
+
+  <div class="inline-flex flex-row-reverse">
+    @for (star of starsList; track star;) {
+    <input
+      type="radio"
+      [id]="inputId + '-' + star"
+      [value]="star"
+      [checked]="value === star"
+      (input)="inputEventHandler($event)"
+      (blur)="blurEventHandler()"
+    />
+
+    <label class="cursor-pointer text-gray-400" [for]="inputId + '-' + star">
+      <fa-icon class="ml-2" [icon]="faStar" size="lg"></fa-icon>
+    </label>
+    }
+  </div>
+</div>

@@ -1,0 +1,7 @@
+input[type="radio"] {
+  -webkit-appearance: none;
+
+  &:checked ~ label {
+    color: yellow;
+  }
+}

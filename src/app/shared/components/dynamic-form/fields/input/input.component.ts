@@ -14,11 +14,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class InputComponent implements ControlValueAccessor {
-  @Input() public inputTitle: string;
+  @Input() public description: string;
   @Input() public inputId: string;
   @Input() public inputType: string;
 
-  public value: any;
+  public value: string | number;
   // public disabledStatus: boolean;
 
   private onChange: any = () => {};
@@ -37,8 +37,8 @@ export class InputComponent implements ControlValueAccessor {
 
   /* ControlValueAccessor methods */
 
-  public writeValue(value: any): void {
-    this.value = value;
+  public writeValue(value: string | number): void {
+    this.value = value || '';
   }
 
   public registerOnChange(fn: any): void {
