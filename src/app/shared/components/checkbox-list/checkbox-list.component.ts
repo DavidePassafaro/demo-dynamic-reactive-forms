@@ -1,7 +1,7 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-export interface CheckboxListItem {
+export interface CheckboxListOption {
   id: string;
   value: string;
   description: string;
@@ -22,7 +22,7 @@ export interface CheckboxListItem {
 })
 export class CheckboxListComponent implements ControlValueAccessor {
   @Input() public inputTitle: string;
-  @Input() public choiceList: CheckboxListItem[] = [];
+  @Input() public options: CheckboxListOption[] = [];
 
   // public disabledStatus: boolean;
 
@@ -33,11 +33,11 @@ export class CheckboxListComponent implements ControlValueAccessor {
 
   public inputEventHandler(event: Event): void {
     const selectedInput: HTMLInputElement = event.target as HTMLInputElement;
-    this.choiceList.find(({ id }) => id === selectedInput.id).checked =
+    this.options.find(({ id }) => id === selectedInput.id).checked =
       selectedInput.checked;
 
     this.onChange(
-      this.choiceList.filter(({ checked }) => checked).map(({ value }) => value)
+      this.options.filter(({ checked }) => checked).map(({ value }) => value)
     );
   }
 
@@ -48,7 +48,7 @@ export class CheckboxListComponent implements ControlValueAccessor {
   /* ControlValueAccessor methods */
 
   public writeValue(value: string[]): void {
-    this.choiceList.forEach((item) => {
+    this.options.forEach((item) => {
       if (value?.includes(item.value)) item.checked = true;
     });
   }

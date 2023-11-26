@@ -3,16 +3,16 @@
     {{ inputTitle }}
   </label>
 
-  @for (choice of choiceList; track choice.id;) {
+  @for (option of options; track option.id;) {
   <input
     type="checkbox"
-    [id]="choice.id"
-    [value]="choice.value"
-    [checked]="choice.checked"
+    [id]="option.id"
+    [value]="option.value"
+    [checked]="option.checked"
     (input)="inputEventHandler($event)"
     (blur)="blurEventHandler()"
   />
-  <label [for]="choice.id"> {{ choice.description }}</label>
+  <label [for]="option.id"> {{ option.description }}</label>
   <br />
   }
 </div>
