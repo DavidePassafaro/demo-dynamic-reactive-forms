@@ -1,0 +1,14 @@
+<div>
+  <label for="large-input" class="block mb-2 text-sm font-medium text-gray-900">
+    {{ inputTitle }}
+  </label>
+
+  <input
+    class="block w-full p-2 text-gray-900 border border-gray-900 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500"
+    [id]="inputId"
+    [type]="inputType"
+    [value]="value"
+    (input)="inputEventHandler($event)"
+    (blur)="blurEventHandler()"
+  />
+</div>
