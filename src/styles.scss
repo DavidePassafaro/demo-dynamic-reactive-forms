@@ -3,3 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.drf-container {
+  @apply mx-auto max-w-screen-md;
+}
