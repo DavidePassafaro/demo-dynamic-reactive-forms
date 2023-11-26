@@ -1,0 +1,46 @@
+$color-primary: #3d314a;
+$color-secondary: #f5f1ed;
+
+:host {
+  @apply absolute top-0 w-full h-full bg-slate-200 bg-opacity-90 z-10 flex justify-center items-center;
+}
+
+.loader {
+  &__text {
+    color: $color-primary;
+  }
+
+  &__filmstrip {
+    position: relative;
+    background: $color-primary;
+    z-index: -1;
+    overflow: hidden;
+
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      height: 120%;
+      border-left: 5px dashed $color-secondary;
+      animation: roll 120ms infinite;
+    }
+
+    &:before {
+      left: 5px;
+    }
+
+    &:after {
+      right: 5px;
+    }
+  }
+}
+
+@keyframes roll {
+  0% {
+    top: 0px;
+  }
+
+  100% {
+    top: -15px;
+  }
+}
