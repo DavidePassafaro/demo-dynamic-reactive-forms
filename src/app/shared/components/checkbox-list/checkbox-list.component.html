@@ -1,0 +1,18 @@
+<div>
+  <label for="large-input" class="block mb-2 text-sm font-medium text-gray-900">
+    {{ inputTitle }}
+  </label>
+
+  @for (choice of choiceList; track choice.id;) {
+  <input
+    type="checkbox"
+    [id]="choice.id"
+    [value]="choice.value"
+    [checked]="choice.checked"
+    (input)="inputEventHandler($event)"
+    (blur)="blurEventHandler()"
+  />
+  <label [for]="choice.id"> {{ choice.description }}</label>
+  <br />
+  }
+</div>
