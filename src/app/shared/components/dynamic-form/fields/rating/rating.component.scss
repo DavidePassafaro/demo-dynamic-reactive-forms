@@ -6,6 +6,10 @@ input[type="radio"] {
   }
 }
 
+.error-text {
+  @apply text-red-500 mt-2 font-medium;
+}
+
 :host.ng-touched.ng-invalid {
   input[type="radio"] {
     & ~ label {

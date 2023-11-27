@@ -23,6 +23,7 @@ export interface RadioListOption {
 export class RadioListComponent implements ControlValueAccessor {
   @Input() public description: string;
   @Input() public options: RadioListOption[] = [];
+  @Input() public errorText: string;
 
   public value: string;
   // public disabledStatus: boolean;

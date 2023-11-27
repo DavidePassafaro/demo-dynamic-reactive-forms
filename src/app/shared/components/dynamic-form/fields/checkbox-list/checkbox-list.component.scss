@@ -1,3 +1,7 @@
+.error-text {
+  @apply text-red-500 mt-2 font-medium;
+}
+
 :host.ng-touched.ng-invalid {
   input[type="checkbox"] {
     @apply accent-red-500;

@@ -34,7 +34,19 @@ const COMPONENTS_MAP = {
 };
 
 const CUSTOM_SYNC_VALIDATORS: { [key: string]: ValidatorFn } = {
-  twoWords: Validators.pattern(/^(\w.+\s).+$/),
+  twoWords: (control: UntypedFormControl) => {
+    const isValid: boolean = /^(\w.+\s).+$/.test(control.value);
+    return isValid ? null : { twoWords: true };
+  },
+};
+
+const VALIDATORS_ERROR_MESSAGES: { [key: string]: (params: any) => string } = {
+  required: () => 'This field is required',
+  minlength: ({ requiredLength, actualLength }) =>
+    `Text must be longer than ${requiredLength} characters, write ${
+      requiredLength - actualLength
+    } more`,
+  twoWords: () => 'You need to insert at least two words',
 };
 
 @Component({
@@ -160,9 +172,12 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         if (status === 'VALID') {
           nativeElement.classList.remove('ng-invalid');
           nativeElement.classList.add('ng-valid');
+          fieldRef['errorText'] = '';
         } else {
           nativeElement.classList.remove('ng-valid');
           nativeElement.classList.add('ng-invalid');
+          if (formControl.touched)
+            fieldRef['errorText'] = this.getErrorMessage(formControl);
         }
       });
 
@@ -177,6 +192,16 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
       formControl.markAsTouched();
       nativeElement.classList.remove('ng-untouched');
       nativeElement.classList.add('ng-touched');
+      if (formControl.invalid)
+        fieldRef['errorText'] = this.getErrorMessage(formControl);
     });
+  }
+
+  private getErrorMessage(formControl: UntypedFormControl): string {
+    const errorKey: string = Object.keys(formControl.errors)[0];
+    const params: any = formControl.errors[errorKey];
+
+    const errorMessage: string = VALIDATORS_ERROR_MESSAGES[errorKey](params);
+    return errorMessage || 'There is an error';
   }
 }

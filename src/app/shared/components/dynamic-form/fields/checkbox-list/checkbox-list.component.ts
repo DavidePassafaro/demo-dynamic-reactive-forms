@@ -24,6 +24,7 @@ export interface CheckboxListOption {
 export class CheckboxListComponent implements ControlValueAccessor {
   @Input() public description: string;
   @Input() public options: CheckboxListOption[] = [];
+  @Input() public errorText: string;
 
   // public disabledStatus: boolean;
 

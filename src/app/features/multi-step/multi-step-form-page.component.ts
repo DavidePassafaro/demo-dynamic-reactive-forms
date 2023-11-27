@@ -102,7 +102,10 @@ export class MultiStepFormPageComponent {
           label: 'Other feedbacks',
           type: 'textarea',
           defaultValue: 'This demo is amazing',
-          validators: [{ name: 'minLength', params: [25] }],
+          validators: [
+            { name: 'required' },
+            { name: 'minLength', params: [25] },
+          ],
         },
       ],
     },

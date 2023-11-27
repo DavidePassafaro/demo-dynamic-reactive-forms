@@ -9,3 +9,9 @@
   (input)="inputEventHandler($event)"
   (blur)="blurEventHandler()"
 />
+
+<!-- errorText -->
+
+@if (errorText) {
+<div class="error-text">* {{ errorText }}</div>
+}

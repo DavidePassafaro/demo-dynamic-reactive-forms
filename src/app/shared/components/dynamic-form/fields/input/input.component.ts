@@ -18,6 +18,7 @@ export class InputComponent implements ControlValueAccessor {
   @Input() public description: string;
   @Input() public inputId: string;
   @Input() public inputType: string;
+  @Input() public errorText: string;
 
   public value: string | number;
   // public disabledStatus: boolean;

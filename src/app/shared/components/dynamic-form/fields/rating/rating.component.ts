@@ -20,6 +20,7 @@ import { IconDefinition, faStar } from '@fortawesome/free-solid-svg-icons';
 export class RatingComponent implements ControlValueAccessor {
   @Input() public description: string;
   @Input() public inputId: string;
+  @Input() public errorText: string;
 
   public value: number = 0;
   // public disabledStatus: boolean;

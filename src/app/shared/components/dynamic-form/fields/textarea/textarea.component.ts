@@ -17,6 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class TextareaComponent implements ControlValueAccessor {
   @Input() public description: string;
   @Input() public inputId: string;
+  @Input() public errorText: string;
 
   public value: string | number;
   // public disabledStatus: boolean;
