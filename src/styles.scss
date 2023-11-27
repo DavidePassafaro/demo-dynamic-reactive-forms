@@ -16,6 +16,10 @@
   }
 }
 
+.link {
+  @apply text-blue-600 font-semibold hover:underline;
+}
+
 .balance {
   text-wrap: balance;
 }

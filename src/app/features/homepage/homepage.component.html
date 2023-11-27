@@ -1,33 +1,28 @@
-<div class="drf-container px-4 py-20 flex flex-col h-full pt-6">
+<div class="drf-container px-4 py-6 flex flex-col h-full">
   <h1 class="font-bold text-3xl lg:text-6xl text-center mb-6 lg:mb-12">
-    Welcome to this demo
+    Welcome to this demo!
   </h1>
 
-  <div class="text-center balance">
-    This is a demo to show how to create a
-    <span class="font-semibold">Dynamic Reactive Form</span>.
-    <br />
+  <div class="text-center text-lg lg:text-xl">
+    <div class="balance mb-4">
+      You can test the following
+      <span class="font-semibold">Dynamic Reactive Forms</span>:
+    </div>
 
-    <span>
-      You can find the source code
-      <a
-        href="https://github.com/DavidePassafaro/demo-dynamic-reactive-forms"
-        target="_blank"
-        class="text-blue-600 font-semibold hover:underline"
-      >
-        here</a
-      >.
-    </span>
+    <ul class="mb-16">
+      <li class="mb-2">
+        <a routerLink="../simple-form" class="link mb-4"> Simple Form </a>
+      </li>
+      <li>
+        <a routerLink="../multi-step-form" class="link"> Multi Step Form </a>
+      </li>
+    </ul>
 
-    <br />
-    <br />
-    <br />
-
-    <h3 class="text-lg lg:text-xl text-center">This demo was also shown at</h3>
+    <span>This demo was also shown at</span>
     <a
       href="https://2023.ngrome.io/"
       target="_blank"
-      class="flex flex-col lg:flex-row justify-center items-center text-white no-underline hover:no-underline font-semibold text-4xl pt-2"
+      class="flex flex-col lg:flex-row justify-center items-center text-white no-underline hover:no-underline font-semibold text-4xl pt-2 mb-16"
     >
       <svg
         width="220"
@@ -69,25 +64,9 @@
       </span>
     </a>
 
-    <br />
-    <br />
-
-    <h3 class="balance">
-      You can play with a
-      <a
-        routerLink="../simple-form"
-        class="text-blue-600 font-semibold hover:underline"
-      >
-        Simple Form
-      </a>
-      or a
-      <a
-        routerLink="../multi-step-form"
-        class="text-blue-600 font-semibold hover:underline"
-      >
-        Multi Step Form</a
-      >.
-    </h3>
-    <br />
+    <span>
+      You can find the source code
+      <a [href]="gitHubUrl" target="_blank" class="link">here</a>.
+    </span>
   </div>
 </div>

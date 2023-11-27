@@ -8,4 +8,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule],
 })
-export class HomepageComponent {}
+export class HomepageComponent {
+  public readonly gitHubUrl: string =
+    'https://github.com/DavidePassafaro/demo-dynamic-reactive-forms';
+}
