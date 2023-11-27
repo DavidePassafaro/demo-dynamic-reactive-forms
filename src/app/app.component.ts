@@ -15,6 +15,6 @@ export class AppComponent {
   public pages: NavigationPage[] = [
     { label: 'Simple', link: AppPaths.Simple },
     { label: 'Multi Step', link: AppPaths.MultiStep },
-    { label: 'Theater', link: AppPaths.Theatre },
+    // { label: 'Theater', link: AppPaths.Theatre },
   ];
 }
