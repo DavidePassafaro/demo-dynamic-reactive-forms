@@ -3,11 +3,16 @@ input {
 }
 
 .error-text {
-  @apply text-red-500 mt-2 font-medium;
+  @apply hidden;
 }
 
-:host.ng-touched.ng-invalid {
+:host.ng-touched.ng-invalid,
+:host.ng-dirty.ng-invalid {
   input {
     @apply bg-red-50 border-red-500 text-red-500 placeholder-red-700 focus:ring-red-500 focus:border-red-500;
+  }
+
+  .error-text {
+    @apply block text-red-500 mt-2 font-medium;
   }
 }

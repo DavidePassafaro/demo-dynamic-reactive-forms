@@ -41,12 +41,10 @@ const CUSTOM_SYNC_VALIDATORS: { [key: string]: ValidatorFn } = {
 };
 
 const VALIDATORS_ERROR_MESSAGES: { [key: string]: (params: any) => string } = {
-  required: () => 'This field is required',
-  minlength: ({ requiredLength, actualLength }) =>
-    `Text must be longer than ${requiredLength} characters, write ${
-      requiredLength - actualLength
-    } more`,
-  twoWords: () => 'You need to insert at least two words',
+  required: () => 'This field is required.',
+  minlength: ({ requiredLength: req, actualLength: act }) =>
+    `Must be longer than ${req}. Add ${req - act} more.`,
+  twoWords: () => 'You need to insert at least two words.',
 };
 
 @Component({
@@ -161,6 +159,8 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     nativeElement.classList.add('ng-untouched');
     nativeElement.classList.add('ng-pristine');
     nativeElement.classList.add(formControl.valid ? 'ng-valid' : 'ng-invalid');
+    if (formControl.invalid)
+      fieldRef['errorText'] = this.getErrorMessage(formControl);
 
     formControl.valueChanges
       .pipe(takeUntil(this.onDestroy$))
@@ -176,8 +176,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         } else {
           nativeElement.classList.remove('ng-valid');
           nativeElement.classList.add('ng-invalid');
-          if (formControl.touched)
-            fieldRef['errorText'] = this.getErrorMessage(formControl);
+          fieldRef['errorText'] = this.getErrorMessage(formControl);
         }
       });
 
@@ -192,8 +191,6 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
       formControl.markAsTouched();
       nativeElement.classList.remove('ng-untouched');
       nativeElement.classList.add('ng-touched');
-      if (formControl.invalid)
-        fieldRef['errorText'] = this.getErrorMessage(formControl);
     });
   }
 

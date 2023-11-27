@@ -1,10 +1,15 @@
 .error-text {
-  @apply text-red-500 mt-2 font-medium;
+  @apply hidden;
 }
 
-:host.ng-touched.ng-invalid {
+:host.ng-touched.ng-invalid,
+:host.ng-dirty.ng-invalid {
   input[type="checkbox"] {
     @apply accent-red-500;
+  }
+
+  .error-text {
+    @apply block text-red-500 mt-2 font-medium;
   }
 
   label {
