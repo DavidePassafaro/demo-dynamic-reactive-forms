@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, JsonPipe } from '@angular/common';
 import { DynamicFormControl } from 'src/app/shared/components/dynamic-form/dynamic-form.interface';
 import { DynamicFormComponent } from '@drf-shared';
 import { UntypedFormGroup } from '@angular/forms';
@@ -97,6 +97,8 @@ export class SimpleFormPageComponent {
   }
 
   public submitClickHandler(): void {
-    console.log(this.formGroup.getRawValue());
+    const value = this.formGroup.getRawValue();
+    console.log(value);
+    alert(new JsonPipe().transform(value));
   }
 }

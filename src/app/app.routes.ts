@@ -4,7 +4,6 @@ export const AppPaths = {
   Homepage: 'home',
   Simple: 'simple-form',
   MultiStep: 'multi-step-form',
-  Theatre: 'theatre-form',
 };
 
 export const routes: Routes = [
@@ -31,14 +30,6 @@ export const routes: Routes = [
         (m) => m.MultiStepFormPageComponent
       ),
     title: 'DRF • Multi Step Form',
-  },
-  {
-    path: AppPaths.Theatre,
-    loadComponent: () =>
-      import('./features/theater/theater-form-page.component').then(
-        (m) => m.TheaterFormPageComponent
-      ),
-    title: 'DRF • Theatre Form',
   },
   { path: '', redirectTo: `/${AppPaths.Homepage}`, pathMatch: 'full' },
   { path: '**', redirectTo: `/${AppPaths.Homepage}`, pathMatch: 'full' },

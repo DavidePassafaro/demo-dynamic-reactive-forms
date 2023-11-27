@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, JsonPipe } from '@angular/common';
 import { DynamicFormComponent } from '@drf-shared';
 import { DynamicFormControl } from 'src/app/shared/components/dynamic-form/dynamic-form.interface';
 import { UntypedFormGroup } from '@angular/forms';
@@ -126,6 +126,9 @@ export class MultiStepFormPageComponent {
       this.formGroup.getRawValue();
 
     if (this.currentStep < this.multiStepControl.length - 1) this.currentStep++;
-    else console.log(this.result);
+    else {
+      console.log(this.result);
+      alert(new JsonPipe().transform(this.result));
+    }
   }
 }
