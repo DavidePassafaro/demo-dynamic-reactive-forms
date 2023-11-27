@@ -10,6 +10,7 @@ export interface RadioListOption {
 @Component({
   selector: 'drf-radio-list',
   templateUrl: './radio-list.component.html',
+  styleUrl: './radio-list.component.scss',
   standalone: true,
   providers: [
     {

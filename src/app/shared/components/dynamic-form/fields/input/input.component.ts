@@ -4,6 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'drf-input',
   templateUrl: './input.component.html',
+  styleUrl: './input.component.scss',
   standalone: true,
   providers: [
     {

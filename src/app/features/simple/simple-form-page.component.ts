@@ -17,7 +17,7 @@ export class SimpleFormPageComponent {
       label: 'Your name and surname',
       type: 'input',
       defaultValue: '',
-      validators: [{ name: 'required' }, { name: 'minLength', params: [3] }],
+      validators: [{ name: 'required' }, { name: 'twoWords' }],
     },
     {
       key: 'experience',
@@ -40,7 +40,8 @@ export class SimpleFormPageComponent {
           description: 'Senior (+3 years)',
         },
       ],
-      defaultValue: 'middle',
+      // defaultValue: 'middle',
+      validators: [{ name: 'required' }],
     },
     {
       key: 'skills',
@@ -86,6 +87,7 @@ export class SimpleFormPageComponent {
       label: 'Other feedbacks',
       type: 'textarea',
       defaultValue: 'This demo is amazing',
+      validators: [{ name: 'minLength', params: [25] }],
     },
   ];
 

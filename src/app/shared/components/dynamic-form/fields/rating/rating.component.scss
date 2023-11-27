@@ -2,6 +2,18 @@ input[type="radio"] {
   -webkit-appearance: none;
 
   &:checked ~ label {
-    color: yellow;
+    @apply text-yellow-400;
+  }
+}
+
+:host.ng-touched.ng-invalid {
+  input[type="radio"] {
+    & ~ label {
+      @apply text-red-200;
+    }
+
+    &:checked ~ label {
+      @apply text-red-500;
+    }
   }
 }

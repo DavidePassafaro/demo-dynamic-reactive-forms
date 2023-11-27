@@ -27,10 +27,7 @@ export class MultiStepFormPageComponent {
           label: 'Your name and surname',
           type: 'input',
           defaultValue: '',
-          validators: [
-            { name: 'required' },
-            { name: 'minLength', params: [3] },
-          ],
+          validators: [{ name: 'required' }, { name: 'twoWords' }],
         },
         {
           key: 'experience',
@@ -105,6 +102,7 @@ export class MultiStepFormPageComponent {
           label: 'Other feedbacks',
           type: 'textarea',
           defaultValue: 'This demo is amazing',
+          validators: [{ name: 'minLength', params: [25] }],
         },
       ],
     },

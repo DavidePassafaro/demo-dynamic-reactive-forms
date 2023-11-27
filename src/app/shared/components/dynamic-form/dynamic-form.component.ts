@@ -6,6 +6,7 @@ import {
   ViewContainerRef,
   EventEmitter,
   OnDestroy,
+  ComponentRef,
 } from '@angular/core';
 import { DynamicFormControl } from './dynamic-form.interface';
 import {
@@ -32,6 +33,10 @@ const COMPONENTS_MAP = {
   textarea: TextareaComponent,
 };
 
+const CUSTOM_SYNC_VALIDATORS: { [key: string]: ValidatorFn } = {
+  twoWords: Validators.pattern(/^(\w.+\s).+$/),
+};
+
 @Component({
   selector: 'drf-dynamic-form',
   template: '',
@@ -46,8 +51,6 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     const formGroup: UntypedFormGroup = this.createFormClassAndTemplate();
     this.formGroupCreated.emit(formGroup);
   }
-
-  @Input() public customSyncValidators: ValidatorFn[];
 
   @Output() public formGroupCreated: EventEmitter<UntypedFormGroup> =
     new EventEmitter();
@@ -93,7 +96,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     const validators = [];
 
     formField.validators?.forEach(({ name, params }) => {
-      const validator = Validators[name] || this.customSyncValidators[name];
+      const validator = Validators[name] || CUSTOM_SYNC_VALIDATORS[name];
       if (!validator) throw new Error(`Validator ${name} not registered!`);
 
       if (params) validators.push(validator(...params));
@@ -107,52 +110,73 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     formField: DynamicFormControl,
     formControl: UntypedFormControl
   ): void {
-    const component = this.vrc.createComponent(
+    const componentRef: ComponentRef<unknown> = this.vrc.createComponent(
       COMPONENTS_MAP[formField.type] as any
     );
 
-    component.location.nativeElement.classList.add('mb-6');
+    componentRef.location.nativeElement.classList.add('mb-6');
 
     if (formField.type === 'input') {
-      const field: Partial<InputComponent> = component.instance;
+      const field: Partial<InputComponent> = componentRef.instance;
       field.description = formField.label;
     } else if (formField.type === 'checkbox-list') {
-      const field: Partial<CheckboxListComponent> = component.instance;
+      const field: Partial<CheckboxListComponent> = componentRef.instance;
       field.description = formField.label;
       field.options = formField.options;
     } else if (formField.type === 'rating') {
-      const field: Partial<RatingComponent> = component.instance;
+      const field: Partial<RatingComponent> = componentRef.instance;
       field.description = formField.label;
     } else if (formField.type === 'radio-list') {
-      const field: Partial<RadioListComponent> = component.instance;
+      const field: Partial<RadioListComponent> = componentRef.instance;
       field.description = formField.label;
       field.options = formField.options;
     } else if (formField.type === 'textarea') {
-      const field: Partial<TextareaComponent> = component.instance;
+      const field: Partial<TextareaComponent> = componentRef.instance;
       field.description = formField.label;
     }
 
-    this.appendFormControlToField(
-      component.instance as ControlValueAccessor,
-      formControl
-    );
+    this.appendFormControlToField(componentRef, formControl);
   }
 
   private appendFormControlToField(
-    fieldRef: ControlValueAccessor,
+    componentRef: ComponentRef<unknown>,
     formControl: UntypedFormControl
   ): void {
+    const fieldRef = componentRef.instance as ControlValueAccessor;
+    const nativeElement = componentRef.location.nativeElement;
+
     fieldRef.writeValue(formControl.value);
+    nativeElement.classList.add('ng-untouched');
+    nativeElement.classList.add('ng-pristine');
+    nativeElement.classList.add(formControl.valid ? 'ng-valid' : 'ng-invalid');
 
     formControl.valueChanges
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((value) => fieldRef.writeValue(value));
 
+    formControl.statusChanges
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((status) => {
+        if (status === 'VALID') {
+          nativeElement.classList.remove('ng-invalid');
+          nativeElement.classList.add('ng-valid');
+        } else {
+          nativeElement.classList.remove('ng-valid');
+          nativeElement.classList.add('ng-invalid');
+        }
+      });
+
     fieldRef.registerOnChange((value) => {
       formControl.setValue(value);
       formControl.updateValueAndValidity();
+      nativeElement.classList.remove('ng-pristine');
+      nativeElement.classList.add('ng-dirty');
     });
 
-    fieldRef.registerOnTouched(() => formControl.markAsTouched());
+    fieldRef.registerOnTouched(() => {
+      formControl.markAsTouched();
+      nativeElement.classList.remove('ng-untouched');
+      nativeElement.classList.add('ng-touched');
+    });
   }
 }

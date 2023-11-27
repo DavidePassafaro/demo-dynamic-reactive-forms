@@ -11,6 +11,7 @@ export interface CheckboxListOption {
 @Component({
   selector: 'drf-checkbox-list',
   templateUrl: './checkbox-list.component.html',
+  styleUrl: './checkbox-list.component.scss',
   standalone: true,
   providers: [
     {

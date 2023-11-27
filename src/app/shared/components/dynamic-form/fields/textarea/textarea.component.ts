@@ -4,6 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'drf-textarea',
   templateUrl: './textarea.component.html',
+  styleUrl: './textarea.component.scss',
   standalone: true,
   providers: [
     {

@@ -1,0 +1,9 @@
+:host.ng-touched.ng-invalid {
+  input[type="radio"] {
+    @apply accent-red-500;
+  }
+
+  label {
+    @apply text-red-500;
+  }
+}

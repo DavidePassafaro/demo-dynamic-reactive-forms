@@ -7,3 +7,7 @@
 .drf-container {
   @apply mx-auto max-w-screen-md;
 }
+
+:focus-visible {
+  outline: none;
+}
