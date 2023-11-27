@@ -38,7 +38,15 @@ const COMPONENTS_MAP = {
   standalone: true,
 })
 export class DynamicFormComponent implements OnInit, OnDestroy {
-  @Input() public dynamicForm: DynamicFormControl[];
+  private _dynamicForm: DynamicFormControl[];
+  @Input() public set dynamicForm(dynamicForm: DynamicFormControl[]) {
+    this._dynamicForm = dynamicForm;
+
+    this.vrc.clear();
+    const formGroup: UntypedFormGroup = this.createFormClassAndTemplate();
+    this.formGroupCreated.emit(formGroup);
+  }
+
   @Input() public customSyncValidators: ValidatorFn[];
 
   @Output() public formGroupCreated: EventEmitter<UntypedFormGroup> =
@@ -48,10 +56,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 
   constructor(public vrc: ViewContainerRef) {}
 
-  public ngOnInit(): void {
-    const formGroup: UntypedFormGroup = this.createFormClassAndTemplate();
-    this.formGroupCreated.emit(formGroup);
-  }
+  public ngOnInit(): void {}
 
   public ngOnDestroy(): void {
     this.onDestroy$.next();
@@ -63,7 +68,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   private createFormClassAndTemplate(): UntypedFormGroup {
     const dynamicFormGroup = new UntypedFormGroup({});
 
-    this.dynamicForm.forEach((formField) => {
+    this._dynamicForm.forEach((formField) => {
       if (!COMPONENTS_MAP[formField.type])
         throw new Error(`Field type ${formField.type} not registered!`);
 

@@ -1,10 +1,15 @@
 <div class="drf-container px-4 py-20 flex flex-col h-full pt-8">
-  <h1 class="font-bold text-3xl lg:text-6xl text-center mb-16">
+  <h1 class="font-bold text-3xl lg:text-6xl text-center mb-6">
     Multi Step Form
   </h1>
 
+  <h3 class="font-bold text-3xl lg:text-2xl text-center mb-16">
+    Step {{ currentStep + 1 }} -
+    {{ multiStepControl[currentStep].stepName }}
+  </h3>
+
   <drf-dynamic-form
-    [dynamicForm]="dynamicForm"
+    [dynamicForm]="multiStepControl[currentStep].dynamicFormControl"
     (formGroupCreated)="formGroupCreatedHandler($event)"
   ></drf-dynamic-form>
 
@@ -13,6 +18,7 @@
     type="button"
     class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 disabled:bg-gray-400 disabled:touch-none"
     [disabled]="formGroup.invalid"
+    (click)="submitClickHandler()"
   >
     Submit
   </button>
