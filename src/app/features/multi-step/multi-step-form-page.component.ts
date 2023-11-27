@@ -50,7 +50,7 @@ export class MultiStepFormPageComponent {
               description: 'Senior (+3 years)',
             },
           ],
-          defaultValue: 'middle',
+          validators: [{ name: 'required' }],
         },
         {
           key: 'skills',
@@ -83,7 +83,7 @@ export class MultiStepFormPageComponent {
               description: 'Vue',
             },
           ],
-          defaultValue: ['javascript', 'typescript', 'angular'],
+          validators: [{ name: 'required' }],
         },
       ],
     },
@@ -95,7 +95,7 @@ export class MultiStepFormPageComponent {
           key: 'rating',
           label: 'Rate this demo',
           type: 'rating',
-          defaultValue: 5,
+          validators: [{ name: 'required' }],
         },
         {
           key: 'feedback',
@@ -123,6 +123,11 @@ export class MultiStepFormPageComponent {
   }
 
   public submitClickHandler(): void {
+    if (this.formGroup.invalid) {
+      this.formGroup.markAllAsTouched();
+      return;
+    }
+
     this.result[this.multiStepControl[this.currentStep].stepKey] =
       this.formGroup.getRawValue();
 

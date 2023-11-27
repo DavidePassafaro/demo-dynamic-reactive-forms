@@ -40,7 +40,6 @@ export class SimpleFormPageComponent {
           description: 'Senior (+3 years)',
         },
       ],
-      // defaultValue: 'middle',
       validators: [{ name: 'required' }],
     },
     {
@@ -74,13 +73,13 @@ export class SimpleFormPageComponent {
           description: 'Vue',
         },
       ],
-      defaultValue: ['javascript', 'typescript', 'angular'],
+      validators: [{ name: 'required' }],
     },
     {
       key: 'rating',
       label: 'Rate this demo',
       type: 'rating',
-      defaultValue: 5,
+      validators: [{ name: 'required' }],
     },
     {
       key: 'feedback',
@@ -99,6 +98,11 @@ export class SimpleFormPageComponent {
   }
 
   public submitClickHandler(): void {
+    if (this.formGroup.invalid) {
+      this.formGroup.markAllAsTouched();
+      return;
+    }
+
     const value = this.formGroup.getRawValue();
     console.log(value);
     alert(new JsonPipe().transform(value));

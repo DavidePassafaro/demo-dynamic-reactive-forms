@@ -124,7 +124,8 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
       COMPONENTS_MAP[formField.type] as any
     );
 
-    componentRef.location.nativeElement.classList.add('mb-6');
+    componentRef.location.nativeElement.classList.add('mb-3');
+    componentRef.location.nativeElement.classList.add('lg:mb-5');
 
     if (formField.type === 'input') {
       const field: Partial<InputComponent> = componentRef.instance;
@@ -179,6 +180,11 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
           fieldRef['errorText'] = this.getErrorMessage(formControl);
         }
       });
+
+    formControl.markAsTouched = () => {
+      nativeElement.classList.remove('ng-untouched');
+      nativeElement.classList.add('ng-touched');
+    };
 
     fieldRef.registerOnChange((value) => {
       formControl.setValue(value);

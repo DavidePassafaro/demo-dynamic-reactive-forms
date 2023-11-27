@@ -9,7 +9,7 @@ textarea {
 :host.ng-touched.ng-invalid,
 :host.ng-dirty.ng-invalid {
   textarea {
-    @apply bg-red-50 border-red-500 text-red-700 placeholder-red-700 focus:ring-red-500 focus:border-red-500;
+    @apply bg-red-50 border-red-500 text-red-500 placeholder-red-700 focus:ring-red-500 focus:border-red-500;
   }
 
   .error-text {
