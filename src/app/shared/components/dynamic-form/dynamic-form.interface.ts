@@ -4,10 +4,7 @@ import { RadioListOption } from './fields/radio-list/radio-list.component';
 export interface BaseControl {
   key: string;
   label: string;
-  validators?: {
-    name: string;
-    params?: any[];
-  }[];
+  validators?: { name: string; params?: any[] }[];
 }
 
 export interface InputControl extends BaseControl {
