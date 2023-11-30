@@ -16,3 +16,9 @@ textarea {
     @apply block text-red-500 mt-2 font-medium;
   }
 }
+
+:host.ng-valid {
+  textarea {
+    @apply bg-green-50 border-green-500 placeholder-green-700 focus:ring-green-500 focus:border-green-500;
+  }
+}
